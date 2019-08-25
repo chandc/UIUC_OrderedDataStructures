@@ -225,7 +225,6 @@ LinkedList<T> LinkedList<T>::merge(const LinkedList<T> &other) const
   // You need to create and return a new list for the merged result.
   LinkedList<T> merged;
 
-
   // -----------------------------------------------------------
   // TODO: Your code here!
   // -----------------------------------------------------------
@@ -258,39 +257,43 @@ LinkedList<T> LinkedList<T>::merge(const LinkedList<T> &other) const
 
   int sizeT = left.size_ + right.size_;
 
+  std::cout << "left size " << left.size_ << "\n";
+  std::cout << "right size " << right.size_ << "\n";
+  std::cout << "sizeT " << sizeT << "\n";
+
   while (sizeT)
   {
+    std::cout << "in the loop"
+              << "\n";
+    std::cout << "sizeT " << sizeT << "\n";
+
     if (left.empty())
     {
-      auto workNode = right.front();
-      merged.pushBack(workNode);
+      merged.pushBack(right.front());
       right.popFront();
+      sizeT--;
       break;
     }
     if (right.empty())
     {
-      auto workNode = left.front();
-      merged.pushBack(workNode);
+      merged.pushBack(left.front());
       left.popFront();
+      sizeT--;
       break;
     }
 
     if (right.front() <= left.front())
     {
-      auto workNode = right.front();
-      merged.pushBack(workNode);
+      merged.pushBack(right.front());
       right.popFront();
+      sizeT--;
     }
-    else 
+    else
     {
-      auto workNode = left.front();
-      merged.pushBack(workNode);
+      merged.pushBack(left.front());
       left.popFront();
+      sizeT--;
     }
-    //if (1==sizeT) { merged->head_ = workNode;}
-    sizeT--;
   }
-  // compare the head of each list and see which one is smaller
-
   return merged;
 }
