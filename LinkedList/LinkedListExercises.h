@@ -257,43 +257,40 @@ LinkedList<T> LinkedList<T>::merge(const LinkedList<T> &other) const
 
   int sizeT = left.size_ + right.size_;
 
+/*
   std::cout << "left size " << left.size_ << "\n";
   std::cout << "right size " << right.size_ << "\n";
   std::cout << "sizeT " << sizeT << "\n";
-
+*/
   while (sizeT)
   {
-    std::cout << "in the loop"
+    /*std::cout << "in the loop"
               << "\n";
     std::cout << "sizeT " << sizeT << "\n";
+    */
 
     if (left.empty())
     {
       merged.pushBack(right.front());
       right.popFront();
-      sizeT--;
-      break;
     }
-    if (right.empty())
+    else if (right.empty())
     {
       merged.pushBack(left.front());
       left.popFront();
-      sizeT--;
-      break;
     }
 
-    if (right.front() <= left.front())
+    else if (right.front() <= left.front())
     {
       merged.pushBack(right.front());
       right.popFront();
-      sizeT--;
     }
     else
     {
       merged.pushBack(left.front());
       left.popFront();
-      sizeT--;
     }
+    sizeT--;
   }
   return merged;
 }

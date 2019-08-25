@@ -569,7 +569,7 @@ bool LinkedList<T>::equals(const LinkedList<T>& other) const {
 
   return true;
 }
-
+/*
 // This returns a sorted copy of the current list. The sort is performed
 // using the insertion sort algorithm that relies on insertOrdered.
 // This is not an efficient operation; insertion sort is O(n^2).
@@ -582,14 +582,18 @@ LinkedList<T> LinkedList<T>::insertionSort() const {
   // Walk along the original list and insert the items to the result in order.
   const Node* cur = head_;
   while (cur) {
+
+    std::cout << "before the call " << cur->data << "\n";
     result.insertOrdered(cur->data);
+    std::cout << "aftert the call " << "\n";
+
     cur = cur->next;
   }
 
   return result;
 }
-
-/*
+*/
+//*
 // A different implementation of insertionSort that doesn't use pointers directly
 template <typename T>
 LinkedList<T> LinkedList<T>::insertionSort() const {
@@ -607,7 +611,7 @@ LinkedList<T> LinkedList<T>::insertionSort() const {
 
   return result;
 }
-*/
+//*/
 
 // Output a string representation of the list.
 // This requires that the data type T supports stream output itself.
