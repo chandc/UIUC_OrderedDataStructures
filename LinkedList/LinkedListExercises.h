@@ -138,14 +138,12 @@ void LinkedList<T>::insertOrdered(const T &newData)
       cur->prev->next = newNode;
       cur->prev = newNode;
 
-
       size_++;
       return;
     }
     cur = cur->next;
-
   }
-// if it reaches this pooint, it means the new Node will be added at the end
+  // if it reaches this pooint, it means the new Node will be added at the end
   tail_->next = newNode;
   newNode->prev = tail_;
   tail_ = newNode;
@@ -227,6 +225,7 @@ LinkedList<T> LinkedList<T>::merge(const LinkedList<T> &other) const
   // You need to create and return a new list for the merged result.
   LinkedList<T> merged;
 
+
   // -----------------------------------------------------------
   // TODO: Your code here!
   // -----------------------------------------------------------
@@ -239,6 +238,59 @@ LinkedList<T> LinkedList<T>::merge(const LinkedList<T> &other) const
   // item in the merged list?
   // Think of what needs to be placed in the merged list first. Then,
   // think about what should come after that. (And so on.)
+
+  // check if either list is empty
+
+  if (left.empty() && right.empty())
+  {
+    return left;
+  }
+  if (left.empty())
+  {
+    return right;
+  }
+  if (right.empty())
+  {
+    return left;
+  }
+
+  //find out size of merged list
+
+  int sizeT = left.size_ + right.size_;
+
+  while (sizeT)
+  {
+    if (left.empty())
+    {
+      auto workNode = right.front();
+      merged.pushBack(workNode);
+      right.popFront();
+      break;
+    }
+    if (right.empty())
+    {
+      auto workNode = left.front();
+      merged.pushBack(workNode);
+      left.popFront();
+      break;
+    }
+
+    if (right.front() <= left.front())
+    {
+      auto workNode = right.front();
+      merged.pushBack(workNode);
+      right.popFront();
+    }
+    else 
+    {
+      auto workNode = left.front();
+      merged.pushBack(workNode);
+      left.popFront();
+    }
+    //if (1==sizeT) { merged->head_ = workNode;}
+    sizeT--;
+  }
+  // compare the head of each list and see which one is smaller
 
   return merged;
 }
