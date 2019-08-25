@@ -79,7 +79,8 @@
  ********************************************************************/
 
 template <typename T>
-void LinkedList<T>::insertOrdered(const T& newData) {
+void LinkedList<T>::insertOrdered(const T &newData)
+{
 
   // -----------------------------------------------------------
   // TODO: Your code here!
@@ -93,6 +94,63 @@ void LinkedList<T>::insertOrdered(const T& newData) {
   // node, and make sure your node refers back with its own pointers.
   // Don't forget to update the list size.
 
+  //if the current list is either 0 or 1 or less than the head node, do a push front
+  if ((size_ == 0) || (newData <= head_->data))
+  {
+    // allocate a new node
+    Node *newNode = new Node(newData);
+
+    if (!head_)
+    {
+      // If empty, insert as the only item as both head and tail.
+      // The Node already has next and prev set to nullptr by default.
+      head_ = newNode;
+      tail_ = newNode;
+    }
+    else
+    {
+      // Otherwise, add the new item as the head.
+      // (We could rewrite this without the temporary variable "oldHead",
+      //  but perhaps this way is clearer.)
+      Node *oldHead = head_;
+      oldHead->prev = newNode;
+      newNode->next = oldHead;
+      head_ = newNode;
+    }
+
+    // update size
+    size_++;
+    return;
+  }
+
+  //allocate new node
+  Node *newNode = new Node(newData);
+  Node *prev = head_;
+  Node *cur = head_->next;
+
+  while (cur->next)
+  {
+    // check if the new Node is smaller or equal to the current Node
+    if (newNode->data <= cur->data)
+    {
+      newNode->next = cur;
+      newNode->prev = cur->prev;
+      cur->prev->next = newNode;
+      cur->prev = newNode;
+
+
+      size_++;
+      return;
+    }
+    cur = cur->next;
+
+  }
+// if it reaches this pooint, it means the new Node will be added at the end
+  tail_->next = newNode;
+  newNode->prev = tail_;
+  tail_ = newNode;
+  size_++;
+  return;
 }
 
 /********************************************************************
@@ -156,7 +214,8 @@ void LinkedList<T>::insertOrdered(const T& newData) {
  ********************************************************************/
 
 template <typename T>
-LinkedList<T> LinkedList<T>::merge(const LinkedList<T>& other) const {
+LinkedList<T> LinkedList<T>::merge(const LinkedList<T> &other) const
+{
 
   // You can't edit the original instance of LinkedList that is calling
   // merge because the function is marked const, and the "other" input
@@ -183,4 +242,3 @@ LinkedList<T> LinkedList<T>::merge(const LinkedList<T>& other) const {
 
   return merged;
 }
-
