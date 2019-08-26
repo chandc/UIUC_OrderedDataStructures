@@ -128,7 +128,7 @@ void LinkedList<T>::insertOrdered(const T &newData)
   Node *prev = head_;
   Node *cur = head_->next;
 
-  while (cur)
+  while (cur->next)
   {
     // check if the new Node is smaller or equal to the current Node
     if (newNode->data <= cur->data)
