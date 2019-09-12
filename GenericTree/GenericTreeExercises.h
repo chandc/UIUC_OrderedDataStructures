@@ -98,6 +98,21 @@ static void treeFactory(GenericTree<int>& tree) {
 
   // ...
 
+tree.clear();
+tree.createRoot(4);
+
+auto four = tree.getRootPtr();
+  // Since addChild returns a pointer to a node, it's possible for us
+  // to chain together function calls like this in succession:
+auto eight = four->addChild(8);
+eight->addChild(16)->addChild(42);
+eight->addChild(23);
+four->addChild(15);
+
+
+
+
+
 }
 
 // treeFactoryTest: This function demonstrates the execution of treeFactory
